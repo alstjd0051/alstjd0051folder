@@ -5,13 +5,13 @@ import PostBoxUI from "../components/commons/postbox/PostBoxUI";
 
 const Home: NextPage = () => {
   return (
-    <div>
+    <div className="max-w-5xl my-7 mx-auto">
       <Head>
         <title>Tyler</title>
       </Head>
       {/* Post Box */}
       <PostBoxUI />
-      <div>
+      <div className="flex">
         {/* Feed */}
         <div></div>
       </div>
