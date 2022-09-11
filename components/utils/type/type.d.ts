@@ -1,6 +1,6 @@
 export type FormData = {
   postTitle: string;
   postBody: string;
-  postImages: string;
+  postImage: string;
   subreddit: string;
 };
