@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import Image from "next/image";
+import PostBoxUI from "../components/commons/postbox/PostBoxUI";
 
 const Home: NextPage = () => {
   return (
@@ -8,7 +9,12 @@ const Home: NextPage = () => {
       <Head>
         <title>Tyler</title>
       </Head>
-      <div>Hello</div>
+      {/* Post Box */}
+      <PostBoxUI />
+      <div>
+        {/* Feed */}
+        <div></div>
+      </div>
     </div>
   );
 };
