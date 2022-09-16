@@ -14,6 +14,22 @@ type Post {
   subreddit_id: ID
   title: String
   username: String
+  votes: [Vote]
+    @materializer(
+      query: "getVotesByPostId"
+      arguments: [{ name: "post_id", field: "id" }]
+    )
+  comments: [Comment]
+    @materializer(
+      query: "getCommentByPostId"
+      arguments: [{ name: "post_id", field: "id" }]
+    )
+
+  subreddit: [Subreddit]
+    @materializer(
+      query: "getSubredditListById"
+      arguments: [{ name: "id", field: "subreddit_id" }]
+    )
 }
 
 type Subreddit {
@@ -37,9 +53,36 @@ type Query {
       table: "comment"
       configuration: "postgresql_config"
     )
+  getCommentByPostId(post_id: ID!): [Comment]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "comment" where "post_id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
+  getVotesByPostId(post_id: ID!): [Vote]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "vote" where "post_id" = $1
+      order by "created_at" desc
+      """
+      configuration: "postgresql_config"
+    )
   """
   This query is an example of how to simply paginate your responses.
   """
+  getSubredditListById(id: ID!): [Subreddit]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "subreddit" where "id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
   getPaginatedCommentList(first: Int!, after: Int!): [Comment]
     @dbquery(
       type: "postgresql"
@@ -75,21 +118,53 @@ type Query {
   getPostList: [Post]
     @dbquery(
       type: "postgresql"
-      schema: "public"
-      table: "post"
+      query: """
+      select * from "post"
+      order by "post"."created_at" desc
+      """
       configuration: "postgresql_config"
     )
+
+  getPostListByPostId(post_id: ID!): Post
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "post"
+      where "post"."id" = $1
+      """
+      configuration: "postgresql_config"
+    )
+  getPostListByTopic(topic: String!): [Post]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select *, "post".id as id from "post"
+      join "subreddit' on "subreddit"."id" = "post"."subreddit_id"
+      where "subreddit"."topic" = $1
+      order by "post"."created_at" desc
+      """
+      configuration: "postgresql_config"
+    )
+
   getSubredditList: [Subreddit]
     @dbquery(
       type: "postgresql"
-      schema: "public"
       table: "subreddit"
       configuration: "postgresql_config"
     )
+
+  getSubredditListByTopic(topic: String!): [Subreddit]
+    @dbquery(
+      type: "postgresql"
+      query: """
+      select * from "subreddit" where "topic" = $1
+      """
+      configuration: "postgresql_config"
+    )
+
   getVoteList: [Vote]
     @dbquery(
       type: "postgresql"
-      schema: "public"
       table: "vote"
       configuration: "postgresql_config"
     )
@@ -102,15 +177,35 @@ type Mutation {
   insertPost(
     image: String!
     body: String!
-    created_at: DateTime!
     subreddit_id: ID!
     title: String!
     username: String!
   ): Post
     @dbquery(
       type: "postgresql"
-      schema: "public"
       table: "post"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+
+  insertSubreddit(topic: String!): Subreddit
+    @dbquery(
+      type: "postgresql"
+      table: "subreddit"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  insertComment(post_id: ID!, username: String!, text: String!): Comment
+    @dbquery(
+      type: "postgresql"
+      table: "comment"
+      dml: INSERT
+      configuration: "postgresql_config"
+    )
+  insertVote(post_id: ID!, username: String!, upvote: Boolean!): Vote
+    @dbquery(
+      type: "postgresql"
+      table: "vote"
       dml: INSERT
       configuration: "postgresql_config"
     )
