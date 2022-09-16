@@ -7,24 +7,48 @@ import {
   GiftIcon,
   ShareIcon,
 } from "@heroicons/react/solid";
-import React from "react";
+import React, { useState } from "react";
 import AvatarUI from "../avatar/AvatarUI";
 import TimeAgo from "react-timeago";
 import Link from "next/link";
+import { Jelly, Orbit } from "@uiball/loaders";
+import { useSession } from "next-auth/react";
+import { toast } from "react-hot-toast";
 
 type Props = {
   post: Post;
 };
 
 const PostUI = ({ post }: Props) => {
+  const [vote, setVote] = useState<boolean>();
+  const { data: session } = useSession();
+
+  const upVote = async (isUpvote: boolean) => {
+    if (!session) {
+      toast("❗You'll need to sign in to vote!");
+      return;
+    }
+  };
+  if (!post)
+    return (
+      <div className="flex w-full items-center justify-center p-10 text-xl">
+        <Jelly size={50} color="#FF4501" />
+      </div>
+    );
   return (
-    <Link href={`/post/${post.id}`}>
+    <Link href={`/post/${post?.id}`}>
       <div className="flex cursor-pointer rounded-md  border border-gray-300 bg-white shadow hover:border hover:border-gray-600 ">
         {/* Votes */}
         <div className="flex flex-col items-center justify-start space-y-1 rounded-l-md bg-gray-50 p-4 text-gray-400 ">
-          <ArrowUpIcon className="voteButton hover:text-red-400 " />
+          <ArrowUpIcon
+            onClick={() => upVote(true)}
+            className="voteButton hover:text-red-400 "
+          />
           <p className="text-black font-bold text-xs">0</p>
-          <ArrowDownIcon className="voteButton hover:text-blue-400 " />
+          <ArrowDownIcon
+            onClick={() => upVote(false)}
+            className="voteButton hover:text-blue-400 "
+          />
         </div>
         <div className="p-3 pb-1">
           {/* Header */}
