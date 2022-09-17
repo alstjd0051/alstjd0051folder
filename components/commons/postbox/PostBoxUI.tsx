@@ -163,7 +163,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
               <input
                 {...register("subreddit", { required: true })}
                 className="m-2 flex-1 bg-blue-50 p-2 outline-none"
-                type="text"
+                type="number"
                 placeholder="Please leave your contact information"
               />
             </div>

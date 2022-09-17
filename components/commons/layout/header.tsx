@@ -19,7 +19,7 @@ const Header = () => {
       <Link href="/">
         <div className="relative h-14 w-20 object-cover flex-shrink-0 cursor-pointer">
           <Image
-            src="https://avatars.githubusercontent.com/u/70365399?v=4"
+            src="https://i.pinimg.com/564x/a9/27/45/a9274588b0f139f0108cab8bb0c2d83e.jpg"
             layout="fill"
             objectFit="contain"
             className="rounded-full"
