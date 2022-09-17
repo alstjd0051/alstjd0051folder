@@ -116,7 +116,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
   return (
     <form
       onSubmit={onSubmit}
-      className="sticky top-16 z-50 bg-white border rounded-md border-gray-300 p-2 "
+      className="sticky top-20 z-50 bg-white border rounded-md border-gray-300 p-2 "
     >
       <div className="flex items-center space-x-3">
         {/* Avatar */}
@@ -131,7 +131,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
             session
               ? subreddit
                 ? `Create a post in ${subreddit}`
-                : `Create a post by entering a title`
+                : `Please write something`
               : "Sign In"
           }
         />
@@ -164,7 +164,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
                 {...register("subreddit", { required: true })}
                 className="m-2 flex-1 bg-blue-50 p-2 outline-none"
                 type="text"
-                placeholder="i.e reactjs"
+                placeholder="Please leave your contact information"
               />
             </div>
           )}

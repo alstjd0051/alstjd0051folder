@@ -21,10 +21,11 @@ const Home: NextPage = () => {
       <div className="flex">
         {/* Feed */}
         <FeedUI />
-        <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline">
+        {/* List subreddits */}
+
+        {/* <div className="sticky top-36 mx-5 mt-5 hidden h-fit min-w-[300px] rounded-md border border-gray-300 bg-white lg:inline">
           <p className="text-lg mb-1 p-4 pb-3 font-bold">Top Communities</p>
           <div>
-            {/* List subreddits */}
             <div>
               {subreddits?.map((subreddit, i) => (
                 <SubredditRow
@@ -35,7 +36,7 @@ const Home: NextPage = () => {
               ))}
             </div>
           </div>
-        </div>
+        </div> */}
       </div>
     </div>
   );
