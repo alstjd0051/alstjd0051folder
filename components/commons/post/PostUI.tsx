@@ -121,7 +121,7 @@ const PostUI = ({ post }: Props) => {
             {/* Image */}
             <img className="w-full" src={post.image} alt="" />
             {/* Footer */}
-            <div className="flex space-x-4 text-gray-400">
+            {/* <div className="flex space-x-4 text-gray-400">
               <div className="postButton">
                 <ChatAltIcon className="h-6 w-6" />
                 <p className="">{post.comments.length} Comments</p>
@@ -141,7 +141,7 @@ const PostUI = ({ post }: Props) => {
               <div className="postButton">
                 <DotsHorizontalIcon className="h-6 w-6" />
               </div>
-            </div>
+            </div> */}
           </div>
         </Link>
       </div>

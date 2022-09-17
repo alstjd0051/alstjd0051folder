@@ -3,6 +3,7 @@ import React from "react";
 import {
   BeakerIcon,
   ChevronDownIcon,
+  CursorClickIcon,
   HomeIcon,
   MenuIcon,
   SearchIcon,
@@ -25,11 +26,14 @@ const Header = () => {
           />
         </div>
       </Link>
-
-      <div className="flex items-center mx-7 xl:min-w-[150px] ">
-        <HomeIcon className="h-5 w-5" />
-        <p className="flex-1 ml-2 hidden lg:inline">MySkill</p>
-      </div>
+      <Link href="/skill">
+        <div className="flex items-center mx-7 xl:min-w-[150px] cursor-pointer ">
+          <p className="flex-1 ml-2 hidden lg:inline-flex  ">
+            MySkill
+            <CursorClickIcon className="h-5 w-5" />
+          </p>
+        </div>
+      </Link>
 
       {/* Search Box */}
       <form className="flex flex-1 items-center space-x-2 border border-gray-200 rounded-full bg-gray-100 px-3 py-1">
