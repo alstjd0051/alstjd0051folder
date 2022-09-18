@@ -159,7 +159,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
           </div>
           {!subreddit && (
             <div className="flex items-center px-2">
-              <p className="min-w-[90px] ">Your Number : </p>
+              <p className="min-w-[90px] ">information : </p>
               <input
                 {...register("subreddit", { required: true })}
                 className="m-2 flex-1 bg-blue-50 p-2 outline-none"
