@@ -186,7 +186,7 @@ const PostBoxUI = ({ subreddit }: Props) => {
                 <p>A Post Title is required</p>
               )}
               {errors.subreddit?.type === "required" && (
-                <p>A Subreddit is required</p>
+                <p>A Information is required</p>
               )}
             </div>
           )}
