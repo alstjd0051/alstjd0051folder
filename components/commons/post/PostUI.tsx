@@ -101,15 +101,15 @@ const PostUI = ({ post }: Props) => {
             {/* Header */}
             <div className="flex items-center space-x-2">
               <AvatarUI seed={post.subreddit[0]?.topic} />
-              <Link href={`/subreddit/${post.subreddit[0]?.topic}`}>
-                <p className="text-xs text-gray-400">
-                  💌&nbsp;
-                  <span className="font-bold text-black hover:text-blue-400 hover:underline">
-                    {post.username}
-                  </span>
-                  <TimeAgo date={post.created_at} />
-                </p>
-              </Link>
+              {/* <Link href={`/subreddit/${post.subreddit[0]?.topic}`}>
+              </Link> */}
+              <p className="text-xs text-gray-400">
+                💌&nbsp;
+                <span className="font-bold text-black hover:text-blue-400 hover:underline">
+                  {post.username}
+                </span>
+                <TimeAgo date={post.created_at} />
+              </p>
             </div>
 
             {/* Body */}
